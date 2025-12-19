@@ -1,0 +1,199 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the bike rental service.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "User's phone number used for authentication.",
+          "format": "string"
+        },
+        "role": {
+          "type": "string",
+          "description": "User's role: customer, verifier, or admin."
+        },
+        "digilockerVerified": {
+          "type": "boolean",
+          "description": "Indicates if the user's ID proof has been verified through Digilocker."
+        },
+        "physicalVerificationBypass": {
+          "type": "boolean",
+          "description": "Indicates if the user has been physically verified by an admin or verifier for a one-time ride."
+        },
+        "idProofPhotoUrl": {
+          "type": "string",
+          "description": "URL of the ID proof photo uploaded during physical verification.",
+          "format": "uri"
+        },
+        "drivingLicensePhotoUrl": {
+          "type": "string",
+          "description": "URL of the driving license photo uploaded during physical verification.",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "phoneNumber",
+        "role"
+      ]
+    },
+    "Bike": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Bike",
+      "type": "object",
+      "description": "Represents a bike available for rent.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the bike."
+        },
+        "brand": {
+          "type": "string",
+          "description": "Brand of the bike (e.g., Hero MotoCorp, Bajaj Auto)."
+        },
+        "model": {
+          "type": "string",
+          "description": "Model name of the bike."
+        },
+        "rentalPrice": {
+          "type": "number",
+          "description": "Rental price per unit time for the bike."
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the bike (ready to rent, in process, not available, completed)."
+        },
+        "photoUrls": {
+          "type": "array",
+          "description": "URLs of photos of the bike.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "brand",
+        "model",
+        "rentalPrice",
+        "status"
+      ]
+    },
+    "Booking": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Booking",
+      "type": "object",
+      "description": "Represents a bike rental booking.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the booking."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to User. (Relationship: User 1:N Booking)"
+        },
+        "bikeId": {
+          "type": "string",
+          "description": "Reference to Bike. (Relationship: Bike 1:N Booking)"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Start date and time of the rental.",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "End date and time of the rental.",
+          "format": "date-time"
+        },
+        "totalPrice": {
+          "type": "number",
+          "description": "Total rental price for the booking."
+        },
+        "bookingStatus": {
+          "type": "string",
+          "description": "Current booking status",
+          "format": "string"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "bikeId",
+        "startTime",
+        "endTime",
+        "totalPrice"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "phone"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user profiles. Includes fields for phone number, role (customer, verifier, admin), digilocker verification status, and URLs for ID and driving license photos.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "Unique identifier for the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/bikes/{bikeId}",
+        "definition": {
+          "entityName": "Bike",
+          "schema": {
+            "$ref": "#/backend/entities/Bike"
+          },
+          "description": "Stores information about available bikes, including brand, model, rental price, status, and photo URLs.",
+          "params": [
+            {
+              "name": "bikeId",
+              "description": "Unique identifier for the bike."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/bookings/{bookingId}",
+        "definition": {
+          "entityName": "Booking",
+          "schema": {
+            "$ref": "#/backend/entities/Booking"
+          },
+          "description": "Stores booking information for each user.  Includes denormalized 'userId' for authorization independence.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "Unique identifier for the user."
+            },
+            {
+              "name": "bookingId",
+              "description": "Unique identifier for the booking."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to support a bike rental service with user authentication, bike management, and booking functionalities. It prioritizes authorization independence by denormalizing user roles where needed and segregates data based on access requirements. The structure uses path-based ownership for user-specific data and membership maps for collaborative access where applicable. The design adheres to Authorization Independence, Structural Segregation, Access Modeling, and Data Clarity principles.\n\nSpecifically, authorization independence is achieved by storing user roles in the `/users/{userId}` document, avoiding `get()` calls in security rules for basic user access. For collaborative data, such as bookings, the `userId` and `bikeId` are stored within the booking document itself. This supports QAPs by enabling secure `list` operations based on the user's role without needing complex filtering logic in the rules. Segregation is evident in separating user profiles, bike information, and booking details into distinct collections, each with its own security posture. The membership map pattern is not directly applicable in this simplified schema, but would be used in features like collaborative booking or bike maintenance, where multiple users might need access to a shared resource. The use of path-based ownership (`/users/{userId}/bookings/{bookingId}`) ensures that a user can only access their own bookings, simplifying security rules."
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "placeholderImages": [
+    {
+      "id": "hero-background",
+      "description": "A scenic view of a mountain road at sunset with a cyclist",
+      "imageUrl": "https://images.unsplash.com/photo-1511994298241-608e28f14fde?q=80&w=1920&auto=format&fit=crop",
+      "imageHint": "cyclist sunset"
+    },
+    {
+      "id": "brand-hero",
+      "description": "Hero MotoCorp logo",
+      "imageUrl": "https://images.unsplash.com/photo-1673382550395-4b6c390377d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxIZXJvJTIwTW90b0NvcnAlMjBsb2dvfGVufDB8fHx8MTc2NTg1MzAwN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "Hero MotoCorp logo"
+    },
+    {
+      "id": "brand-bajaj",
+      "description": "Bajaj Auto logo",
+      "imageUrl": "https://picsum.photos/seed/bajaj/120/60",
+      "imageHint": "Bajaj Auto logo"
+    },
+    {
+      "id": "brand-tvs",
+      "description": "TVS Motor Company logo",
+      "imageUrl": "https://images.unsplash.com/photo-1722915376966-6d1be0b79a8f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxUVlMlMjBsb2dvfGVufDB8fHx8MTc2NTg1MzAwN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "TVS logo"
+    },
+    {
+      "id": "brand-royal-enfield",
+      "description": "Royal Enfield logo",
+      "imageUrl": "https://images.unsplash.com/photo-1728410944064-30964d43cc43?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Um95YWwlMjBFbmZpZWxkJTIwbG9nb3xlbnwwfHx8fDE3NjU4NTMwMDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "Royal Enfield logo"
+    },
+    {
+      "id": "brand-honda",
+      "description": "Honda Motorcycle and Scooter India logo",
+      "imageUrl": "https://images.unsplash.com/photo-1560976936-0c4e7b7b0974?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxIb25kYSUyMGxvZ298ZW58MHx8fHwxNzY1NzY2ODY4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "Honda logo"
+    },
+    {
+      "id": "brand-yamaha",
+      "description": "Yamaha Motor India logo",
+      "imageUrl": "https://images.unsplash.com/photo-1758741683332-249e49768d4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxZYW1haGElMjBsb2dvfGVufDB8fHx8MTc2NTg1MzUyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "Yamaha logo"
+    },
+    {
+      "id": "brand-suzuki",
+      "description": "Suzuki Motorcycle India logo",
+      "imageUrl": "https://images.unsplash.com/photo-1653287184042-eff1453aa30b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxTdXp1a2klMjBsb2dvfGVufDB8fHx8MTc2NTg1MzUyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "Suzuki logo"
+    },
+    {
+      "id": "brand-ktm",
+      "description": "KTM India logo",
+      "imageUrl": "https://picsum.photos/seed/ktm/120/60",
+      "imageHint": "KTM logo"
+    },
+    {
+      "id": "brand-jawa",
+      "description": "Jawa Motorcycles logo",
+      "imageUrl": "https://images.unsplash.com/photo-1642867501868-a493788835cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxKYXdhJTIwbG9nb3xlbnwwfHx8fDE3NjU4NTMwMDd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "Jawa logo"
+    },
+    {
+      "id": "blog-1",
+      "description": "Top 5 Mountain Biking Trails",
+      "imageUrl": "https://images.unsplash.com/photo-1465513670158-c3ac6c8d1a87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtb3VudGFpbiUyMHRyYWlsfGVufDB8fHx8MTc2NTc5ODE4Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mountain trail"
+    },
+    {
+      "id": "blog-2",
+      "description": "Essential Gear for Urban Commuting",
+      "imageUrl": "https://images.unsplash.com/photo-1631211332436-13549bb3f2f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjaXR5JTIwY3ljbGluZ3xlbnwwfHx8fDE3NjU4MzU2MTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "city cycling"
+    },
+    {
+      "id": "blog-3",
+      "description": "Bike Maintenance 101",
+      "imageUrl": "https://images.unsplash.com/photo-1605271864611-58dd08d10547?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiaWtlJTIwd29ya3Nob3B8ZW58MHx8fHwxNzY1ODUyNTI2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "bike workshop"
+    },
+    {
+      "id": "bike-1",
+      "description": "A modern road bike",
+      "imageUrl": "https://images.unsplash.com/photo-1499871435582-a1d4ff236842?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxyb2FkJTIwYmlrZXxlbnwwfHx8fDE3NjU4MzU2MTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "road bike"
+    },
+    {
+      "id": "bike-2",
+      "description": "A sturdy mountain bike",
+      "imageUrl": "https://images.unsplash.com/photo-1606087492572-424ebe0f2f61?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxtb3VudGFpbiUyMGJpa2V8ZW58MHx8fHwxNzY1Nzk4MTg2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mountain bike"
+    },
+    {
+      "id": "bike-3",
+      "description": "A comfortable hybrid bike",
+      "imageUrl": "https://images.unsplash.com/photo-1625815759121-1457e8ab5f9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8aHlicmlkJTIwYmlrZXxlbnwwfHx8fDE3NjU4MzU2MTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "hybrid bike"
+    },
+    {
+      "id": "bike-4",
+      "description": "A sleek city commuter bike",
+      "imageUrl": "https://images.unsplash.com/photo-1602517232715-c4a366f0ce1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjaXR5JTIwYmlrZXxlbnwwfHx8fDE3NjU3OTM1NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "city bike"
+    },
+    {
+      "id": "bike-5",
+      "description": "An electric bike for easy riding",
+      "imageUrl": "https://images.unsplash.com/photo-1618987688327-dc0b28888fe4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxlbGVjdHJpYyUyMGJpa2V8ZW58MHx8fHwxNzY1NzkzNTU2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "electric bike"
+    },
+    {
+      "id": "bike-6",
+      "description": "A high-performance racing bike",
+      "imageUrl": "https://images.unsplash.com/photo-1689866526195-867c5037529d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cmFjaW5nJTIwYmlrZXxlbnwwfHx8fDE3NjU4NTI1MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "racing bike"
+    },
+    {
+      "id": "bike-7",
+      "description": "A rugged gravel bike",
+      "imageUrl": "https://images.unsplash.com/photo-1632050592133-abef905d6529?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxncmF2ZWwlMjBiaWtlfGVufDB8fHx8MTc2NTg1MjUyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gravel bike"
+    },
+    {
+      "id": "bike-8",
+      "description": "A classic cruiser bike",
+      "imageUrl": "https://images.unsplash.com/photo-1705904094776-2df84975bffd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjcnVpc2VyJTIwYmlrZXxlbnwwfHx8fDE3NjU4NTI1MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "cruiser bike"
+    },
+    {
+      "id": "bike-9",
+      "description": "A kids bike with training wheels",
+      "imageUrl": "https://images.unsplash.com/photo-1559887503-33082f092a4c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxraWRzJTIwYmlrZXxlbnwwfHx8fDE3NjU4MzU2MTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "kids bike"
+    },
+    {
+      "id": "bike-10",
+      "description": "A tandem bike for two",
+      "imageUrl": "https://images.unsplash.com/photo-1660029762630-7e7a292c1c8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx0YW5kZW0lMjBiaWtlfGVufDB8fHx8MTc2NTg1MjUyN3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tandem bike"
+    },
+    {
+      "id": "user-avatar-1",
+      "description": "User avatar",
+      "imageUrl": "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjU3NzMxMTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    }
+  ]
+}

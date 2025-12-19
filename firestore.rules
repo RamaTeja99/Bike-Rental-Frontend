@@ -1,0 +1,140 @@
+/**
+ * This ruleset enforces a security model for a bike rental application.
+ *
+ * Core Philosophy:
+ * The security model is based on a combination of user ownership and role-based access
+ * control (RBAC). Users have full control over their own data (profiles, bookings),
+ * while special roles ('admin', 'verifier') are granted elevated privileges to manage
+ * the system and assist users. Publicly browsable data, like bike listings, is
+ * readable by anyone but writable only by administrators.
+ *
+ * Data Structure:
+ * - /users/{userId}: Top-level collection for user profiles. User-specific data
+ *   is secured by matching the document ID to the authenticated user's UID.
+ * - /users/{userId}/bookings/{bookingId}: A subcollection containing a user's
+ *   private booking history, enforcing strict ownership via the path.
+ * - /bikes/{bikeId}: A top-level collection for bike listings, intended for
+ *   public read access.
+ *
+ * Key Security Decisions:
+ * - User Privacy: Listing users from the top-level `/users` collection is explicitly
+ *   disallowed to protect user privacy.
+ * - Role-Based Access: The `role` field within a user's profile document (`/users/{userId}`)
+ *   is used to grant 'admin' or 'verifier' permissions across the database. This
+ *   avoids extra database reads in most rules.
+ * - Admin-Managed Content: All bike data in the `/bikes` collection is managed
+ *   exclusively by users with the 'admin' role.
+ * - Default Secure: Any path or operation not explicitly defined is denied. All
+ *   write operations require authentication and authorization.
+ *
+ * Denormalization for Authorization:
+ * The `role` field is denormalized onto each `/users/{userId}` document. This allows
+ * security rules to efficiently check a user's role with a single `get()` call to
+ * their own profile, making the authorization logic for administrative actions
+ * fast and clear without querying other collections.
+ *
+ * Structural Segregation:
+ * Private user data (bookings) is structurally separated into a user-owned
+ * subcollection (`/users/{userId}/bookings`). Public data (bikes) is in its own
+ * top-level collection (`/bikes`). This separation creates a more secure and
+ * performant model, preventing accidental data exposure in list queries.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions for common authorization checks.
+
+    /**
+     * Checks if a user is authenticated.
+     */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /**
+     * Checks if the authenticated user's UID matches the provided userId.
+     * This is the primary function for enforcing data ownership.
+     */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /**
+     * Retrieves the role of the currently authenticated user from their profile.
+     * This requires one document read per request that uses it.
+     */
+    function getUserData() {
+        return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    /**
+     * Checks if the currently authenticated user has the 'admin' role.
+     */
+    function isAdmin() {
+      return isSignedIn() && getUserData().role == 'admin';
+    }
+
+    /**
+     * Checks if the currently authenticated user has the 'verifier' role.
+     */
+    function isVerifier() {
+        return isSignedIn() && getUserData().role == 'verifier';
+    }
+
+    /**
+     * Checks if the user is an admin or a verifier.
+     */
+    function isAdminOrVerifier() {
+        return isAdmin() || isVerifier();
+    }
+
+
+    /**
+     * @description Secures user profile documents. Users can manage their own profile. Admins and verifiers can read/update any profile for support and verification.
+     * @path /users/{userId}
+     * @allow (create) An authenticated user creating their own profile document.
+     * @deny (get) A standard user trying to read another user's profile.
+     * @principle Enforces self-creation, ownership, and role-based access for administrative tasks.
+     */
+    match /users/{userId} {
+      allow get: if isOwner(userId) || isAdminOrVerifier();
+      allow list: if false;
+      allow create: if isOwner(userId) && request.resource.data.id == userId;
+      allow update: if (isOwner(userId) || isAdminOrVerifier()) && resource != null && request.resource.data.id == resource.data.id;
+      allow delete: if (isOwner(userId) || isAdmin()) && resource != null;
+    }
+
+
+    /**
+     * @description Manages bike listings. Data is public for anyone to read, but only admins can create, update, or delete bike entries.
+     * @path /bikes/{bikeId}
+     * @allow (list) Any client, authenticated or not, browsing the list of available bikes.
+     * @deny (create) A non-admin user attempting to add a new bike to the system.
+     * @principle Implements public read access with writes restricted by a specific role (admin).
+     */
+    match /bikes/{bikeId} {
+      allow get: if true;
+      allow list: if true;
+      allow create: if isAdmin();
+      allow update: if isAdmin() && resource != null;
+      allow delete: if isAdmin() && resource != null;
+    }
+
+
+    /**
+     * @description Secures a user's booking subcollection. Users can only manage their own bookings. Admins/verifiers can view them for support.
+     * @path /users/{userId}/bookings/{bookingId}
+     * @allow (create) A user creating a new booking for themselves under their own profile.
+     * @deny (update) A user trying to modify a booking belonging to another user.
+     * @principle Enforces strict document ownership within a user's data tree and validates relational integrity.
+     */
+    match /users/{userId}/bookings/{bookingId} {
+      allow get: if isOwner(userId) || isAdminOrVerifier();
+      allow list: if isOwner(userId) || isAdminOrVerifier();
+      allow create: if isOwner(userId) && request.resource.data.userId == userId;
+      allow update: if isOwner(userId) && resource != null && request.resource.data.userId == resource.data.userId;
+      allow delete: if isOwner(userId) && resource != null;
+    }
+  }
+}
